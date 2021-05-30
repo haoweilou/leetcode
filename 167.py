@@ -5,6 +5,7 @@ Return the indices of the two numbers (1-indexed) as an integer array answer of 
 
 The tests are generated such that there is exactly one solution. You may not use the same element twice.
 '''
+#HashSet Approach
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
         hashMap = {}
@@ -16,3 +17,16 @@ class Solution:
             if desire in hashMap:
                 return [i+1,hashMap[desire]+1]
         return []
+#Two pointer Approach
+class Solution:
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        l = 0
+        r = len(numbers) - 1
+        while l < r:
+            s = numbers[l] + numbers[r]
+            if s == target:
+                return [l+1,r+1]
+            elif s < target:
+                l+=1
+            else:
+                r-=1
