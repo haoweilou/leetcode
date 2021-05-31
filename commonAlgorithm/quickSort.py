@@ -1,23 +1,21 @@
+import random
 from typing import List
+#cleanest method
+def quickSort(nums:List):
+    n = len(nums)
+    if n <= 1:
+        return nums
+    pivot = nums.pop()
+    smaller = []
+    greater = []
+    for num in nums:
+        if num < pivot:
+            smaller.append(num)
+        else:
+            greater.append(num)
+    return quickSort(smaller) + [pivot] + quickSort(greater)
 
 
-def quickSort(nums: List,left: int, right: int):
-    if left < right:
-        pi = partition(nums,left,right)
-        quickSort(nums,left,pi-1)
-        quickSort(nums,pi+1,right)
-
-def partition(nums: List, left:int,right:int):
-    leftWall = left
-    pivot = nums[right]
-
-    for j in range(left,right):
-        if nums[j] <= pivot:
-            nums[j],nums[leftWall] = nums[leftWall],nums[j]
-            leftWall += 1
-    nums[right],nums[leftWall] = nums[leftWall],nums[right]
-    return leftWall
-
-n = [3,4,1,2,5,7,2,6]
-quickSort(n,0,7)
+n = [random.randint(0,100) for _ in range(10000)]
 print(n)
+print(quickSort(n))
